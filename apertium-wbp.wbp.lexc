@@ -1,0 +1,897 @@
+! Morphological Transducer for wbp
+
+Multichar_Symbols
+
+! Part of speech categories
+%<n%>   ! Noun
+%<adj%>   ! Adjective
+%<v%>   ! Verb
+%<prevb%>   ! Preverb
+%<mod%>   ! Clitic/Particle
+%<vaux%>   ! Auxiliary
+%<cnjcoo%> ! Coordinating Conjunction
+%<prn%>   ! Pronomial
+%<num%>   ! Numeral
+%<adv%>   ! Adverb
+
+! Number morphology
+%<sg%>  ! Singular
+%<du%>  ! Dual
+%<pl%>  ! Plural
+
+! Person morphology
+%<p1%>  ! First Person
+%<p2%>  ! Second Person
+%<p3%>  ! Third Person
+
+! Person morphology
+%<p1%>  ! First Person
+%<p2%>  ! Second Person
+%<p3%>  ! Third Person
+
+! Inclusivity morphology
+%<incl%>  ! Inclusive
+%<excl%>  ! Exclusive
+
+! Subject morphology
+%<subj1sg%>  ! 1st Person Singular Subject
+%<subj2sg%>  ! 2nd Person Singular Subject
+%<subj3sg%>  ! 3rd Person Singular Subject
+%<subj1duincl%>  ! 1st Person Dual Inclusive Subject
+%<subj1duexcl%>  ! 1st Person Dual Exclusive Subject
+%<subj1plincl%>  ! 1st Person Plural Inclusive Subject
+%<subj1plexcl%>  ! 1st Person Plural Exclusive Subject
+%<subj2du%>  ! 2nd Person Dual Subject
+%<subj2pl%>  ! 2nd Person Plural Subject
+%<subj3du%>  ! 3rd Person Dual Subject
+%<subj3pl%>  ! 3rd Person Plural Subject
+
+! Object morphology
+%<obj1sg%>  ! 1st Person Singular Object
+%<obj2sg%>  ! 2nd Person Singular Object
+%<obj3sg%>  ! 3rd Person Singular Object
+%<obj1duincl%>  ! 1st Person Dual Inclusive Object
+%<obj1duexcl%>  ! 1st Person Dual Exclusive object
+%<obj1plincl%>  ! 1st Person Plural Inclusive Object
+%<obj1plexcl%>  ! 1st Person Plural Exclusive Object
+%<obj2du%>  ! 2nd Person Dual Object
+%<obj2pl%>  ! 2nd Person Plural Object
+%<obj3du%>  ! 3rd Person Dual Object
+%<obj3pl%>  ! 3rd Person Plural Object
+
+! Cases
+%<abs%>  ! Absolutive
+%<dat%>  ! Dative
+%<erg%>  ! Ergative
+%<all%>  ! Allative
+%<com%>  ! Comitative
+%<ela%>  ! Elative
+%<loc%>  ! Locative
+%<assoc%>  ! Associative
+%<excess%>  ! Excessive
+%<deniz%>  ! Denizen
+%<inhab%>  ! Inhabitant
+%<sim%>  ! Similative
+%<poss%>  ! Possessive
+%<priv%>  ! Privative
+%<prop%>  ! Proprietive
+%<src%>  ! Source
+
+! Verb Transitivity
+%<tv%>  ! Transitive
+%<iv%>  ! Intransitive
+
+! Verb Tenses
+%<pres%>  ! Present
+%<fti%>  ! Future
+%<past%>  ! Past
+%<imp%>  ! Imperative
+%<inc%> ! Inceptive
+
+! Auxiliaries Tenses
+%<pres%>  ! Present
+%<pii%>  ! Imperfect
+%<prf%>  ! Perfect
+%<caus%>  ! Causal
+%<rel%>  ! Relative
+%<cni%>  ! Conditional
+%<usi%>  ! Usitative
+%<neg%>  ! Negative
+%<adm%>  ! Admonitive
+
+! Verb Directions
+%<twrds%>  ! Towards
+%<away%>  ! Away
+%<across%>  ! Across
+
+%<sent%>      ! Sentence marker
+%<guio%>      ! Hyphen
+%<cm%>        ! Comma
+%<apos%>      ! Apostrophe
+%<rquot%>     ! Quote marker (right hand side) 
+%<lquot%>     ! Quote marker (left hand side) 
+%<rpar%>      ! Parenthetical marker (right hand side) 
+%<lpar%>      ! Parenthetical marker (left hand side) 
+
+
+! Other symbols
+%<subst%> ! Substantive (makes adjective into noun)
+%<pers%> ! Personal Pronoun
+%<refl%> ! Reflexive
+%<top%>  ! Topicalizing particle
+%>       ! Morpheme boundary
+%{I%}    ! can be i or u
+%{D%}    ! can be - or null
+%{U%}	 ! can be i or u
+%-
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!                       M O R P H O T A C T I C S                         !!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+LEXICON Root
+
+NounRoot ;
+VerbRoot ;
+AuxRoot ;
+PronomRoot ;
+ConjRoot ;
+AdjRoot ;
+NumRoot ;
+AdvRoot ; 
+Punctuation ;
+
+
+
+! LEXICON RegNounInfl
+! %<n%>%<sg%>: # ;
+! %<n%>%<pl%>:%>s # ;
+
+
+LEXICON VerbClassI_iv
+%<v%>%<iv%>: VerbClassI_Suffixes ;
+
+LEXICON VerbClassI_tv
+%<v%>%<tv%>: VerbClassI_Suffixes ;
+
+LEXICON VerbClassI_Suffixes
+%<pres%>: VerbDirection ; ! Dir/LR
+%<pres%>:%-mi VerbDirection ;
+%<pres%>:mi VerbDirection ; ! Dir/LR
+%<fti%>:%-ji VerbDirection ;
+%<fti%>:ji VerbDirection ; ! Dir/LR
+%<past%>:%-ja VerbDirection ;
+%<past%>:ja VerbDirection ; ! Dir/LR
+%<imp%>:%-ya VerbDirection ;
+%<imp%>:ya VerbDirection ; ! Dir/LR
+
+LEXICON VerbClassII_tv
+%<v%>%<tv%>: VerbClassII_Suffixes ;
+
+LEXICON VerbClassII_Suffixes
+%<pres%>:%-rni VerbDirection ; 
+%<pres%>:rni VerbDirection ; ! Dir/LR
+%<fti%>:%>ku VerbDirection ;
+%<past%>:%>-rnu VerbDirection ; ! Dir/LR
+%<past%>:%>rnu VerbDirection ;
+%<past%>%<inc%>:%>rnunjunu VerbDirection ;
+%<imp%>:%>ka VerbDirection ;
+
+LEXICON VerbClassIII_iv
+%<v%>%<iv%>: VerbClassIII_Suffixes ;
+
+LEXICON VerbClassIII_tv
+%<v%>%<tv%>: VerbClassIII_Suffixes ;
+
+LEXICON VerbClassIII_Suffixes
+%<pres%>:%-nyi VerbDirection ;
+%<pres%>:nyi VerbDirection ; ! Dir/LR
+%<fti%>:%>ngku VerbDirection ;
+%<past%>:%-ngu VerbDirection ;
+%<past%>:ngu VerbDirection ; ! Dir/LR
+%<imp%>:%>ngka VerbDirection;
+
+
+LEXICON VerbClassIV_tv
+%<v%>%<tv%>: VerbClassIV_Suffixes ;
+
+LEXICON VerbClassIV_Suffixes
+%<pres%>:%>rni VerbDirection ;
+%<fti%>:%>lku VerbDirection ;
+%<past%>:%>rnu VerbDirection ;
+%<past%>%<inc%>:%>rnunjunu VerbDirection ;
+%<imp%>:%>nja VerbDirection ;
+
+LEXICON VerbClassV_iv
+%<v%>%<iv%>: VerbClassV_Suffixes ;
+
+LEXICON VerbClassV_tv
+%<v%>%<tv%>: VerbClassV_Suffixes ;
+
+LEXICON VerbClassV_Suffixes
+%<pres%>:%>ni VerbDirection ;
+%<fti%>:%>nku VerbDirection ;
+%<past%>:%>nu VerbDirection ;
+%<past%>%<inc%>:%>nunjunu VerbDirection ;
+%<imp%>:%>nta VerbDirection ;
+
+LEXICON VerbDirection
+%<twrds%>:%>rni # ;
+%<away%>:%>rra # ;
+%<across%>:%>mpa # ;
+VerbTense ;
+!# ;
+
+LEXICON TenseAux
+ka%<vaux%>%<pres%>:ka Dash_SubjectAux ;
+ka%<vaux%>%<fti%>:kapu Dash_SubjectAux ;
+ka%<vaux%>%<fti%>:kapi Dash_SubjectAux ;! Dir/LR 
+ka%<vaux%>%<pii%>:lpa Dash_SubjectAux ;
+ka%<vaux%>%<caus%>:yunga Dash_SubjectAux ;
+ka%<vaux%>%<caus%>:yinga Dash_SubjectAux ;! Dir/LR 
+ka%<vaux%>%<caus%>:yungu Dash_SubjectAux ;! Dir/LR 
+ka%<vaux%>%<rel%>:kuja Dash_SubjectAux ;
+ka%<vaux%>%<cni%>:kajilpa Dash_SubjectAux ;
+ka%<vaux%>%<usi%>:kala Dash_SubjectAux ;
+ka%<vaux%>%<neg%>:kulaka Dash_SubjectAux ;
+ka%<vaux%>%<adm%>:kalaka Dash_SubjectAux ;
+!ka%<vaux%>%<prf%>:SubjectAux ;
+ka%<vaux%>%<src%>:kajangka Dash_SubjectAux ;
+ka%<vaux%>%<rel%>:ngula Dash_SubjectAux ;! Dir/LR 
+PerfectAux ;
+
+LEXICON PerfectAux
+ka%<vaux%>%<prf%>: SubjectAux ;
+ka%<vaux%>%<prf%>%<subj1sg%>:rna SubjectObjectAux;
+ka%<vaux%>%<prf%>%<subj2sg%>:n SubjectObjectAux;
+ka%<vaux%>%<prf%>%<subj2sg%>:npa SubjectObjectAux;
+!ka%<vaux%>%<prf%>%<subj3sg%>%<obj3sg%>: SubjectObjectAux ;
+ka%<vaux%>%<prf%>%<subj1duincl%>:rli SubjectObjectAux;
+ka%<vaux%>%<prf%>%<subj1duexcl%>:rlijarra SubjectObjectAux;
+ka%<vaux%>%<prf%>%<subj1plincl%>:rlipa SubjectObjectAux;
+ka%<vaux%>%<prf%>%<subj1plexcl%>:rna-lu SubjectObjectAux;
+ka%<vaux%>%<prf%>%<subj2du%>:n-pala SubjectObjectAux;
+ka%<vaux%>%<prf%>%<subj2du%>:npa-pala SubjectObjectAux;
+ka%<vaux%>%<prf%>%<subj2pl%>:nku-lu SubjectObjectAux;
+ka%<vaux%>%<prf%>%<subj3du%>:pala SubjectObjectAux;
+ka%<vaux%>%<prf%>%<subj3pl%>:lu SubjectObjectAux;
+
+LEXICON VerbTense
+%<pii%>:-lpa Dash_Verb_ObjectAux ;
+%<pii%>:lpa Dash_Verb_ObjectAux ; ! Dir/LR 
+Dash_Verb_ObjectAux ;
+
+LEXICON Dash_Verb_ObjectAux
+# ;
+:%>%- ObjectAux ;
+:%> ObjectAux ;
+
+LEXICON NounTense
+%<prf%>: Dash_SubjectAux ;
+%<pii%>:%-lpa Dash_SubjectAux ;
+%<pii%>:lpa Dash_SubjectAux ;! Dir/LR 
+
+!LEXICON Conditional
+!%<vaux%>%<cni%>: %>ji # ;
+!%<vaux%>%<fti%>: %>pi # ;
+!%<vaux%>%<pres%>: # ;
+
+
+LEXICON Dash_SubjectAux
+!# ; 
+:%>%- SubjectAux ;  
+: SubjectAux ; ! Dir/LR 
+:%>%- ObjectAux ;  
+: ObjectAux ; ! Dir/LR 
+%<subj3sg%>: SubjectObjectAux ;
+
+
+LEXICON SubjectAux
+%<subj1sg%>:rna SubjectObjectAux;
+%<subj2sg%>:n SubjectObjectAux;
+%<subj2sg%>:npa SubjectObjectAux;
+!%<subj3sg%>%<obj3sg%>: SubjectObjectAux ;
+%<subj1duincl%>:rli SubjectObjectAux;
+%<subj1duexcl%>:rlijarra SubjectObjectAux;
+%<subj1plincl%>:rlipa SubjectObjectAux;
+%<subj1plexcl%>:rna-lu SubjectObjectAux;
+%<subj1plexcl%>:rnalu SubjectObjectAux; ! Dir/LR
+%<subj2du%>:n-pala SubjectObjectAux;
+%<subj2du%>:npa-pala SubjectObjectAux;
+%<subj2pl%>:nku-lu SubjectObjectAux;
+%<subj2pl%>:nkulu SubjectObjectAux; ! Dir/LR
+%<subj3du%>:pala SubjectObjectAux;
+%<subj3pl%>:lu SubjectObjectAux;
+
+LEXICON SubjectObjectAux
+# ;
+:%>%- ObjectAux ;
+: ObjectAux ;
+
+LEXICON ObjectAux
+# ; 
+%<obj1sg%>:ju SubjectObjectAux ;!%{I%}
+%<obj2sg%>:ngku SubjectObjectAux ;!%{I%}
+%<obj3sg%>:rla SubjectObjectAux ;
+%<obj1duincl%>:ngali SubjectObjectAux ;
+%<obj1duincl%>:ngalingki SubjectObjectAux ;
+%<obj1duexcl%>:jarrangku SubjectObjectAux ;
+%<obj1plincl%>:ngalpa SubjectObjectAux ;
+%<obj1plexcl%>:nganpa SubjectObjectAux ;
+%<obj2du%>:ngku-pala SubjectObjectAux ;
+%<obj2pl%>:nyarra SubjectObjectAux ;
+%<obj3du%>:palangu SubjectObjectAux ;
+%<obj3pl%>:jana SubjectObjectAux ;
+
+
+!LEXICON PronomRoot -- copied from below
+!ngaju:ng Pronomial_p1 ;
+!nyuntu:ny Pronomial ;
+!nyanungu:ny Pronomial ;
+!ngali:ng Pronomial_p1 ;
+!ngajarra:ng Pronomial_p1 ;
+!ngalipa:ng Pronomial_p1 ;
+!nganimpa:ng Pronomial_p1 ;
+!nyumpala:ny Pronomial ;
+!nyurrarla:ny Pronomial ;
+!nyanungu%-jarra:ny Pronomial;
+!nyanungu:ny Pronomial;
+
+
+LEXICON Pronomial
+ngaju%<prn%>%<pers%>%<p1%>%<sg%>:ngaju Dash_CaseSuffix ;
+ngaju%<prn%>%<pers%>%<p1%>%<sg%>:ngajulu Dash_CaseSuffix ; ! Dir/LR
+ngaju%<prn%>%<pers%>%<p1%>%<sg%>:ngaju-lu Dash_CaseSuffix ; ! Dir/LR
+nyuntu%<prn%>%<pers%>%<p2%>%<sg%>:nyuntu Dash_CaseSuffix ;
+nyuntu%<prn%>%<pers%>%<p2%>%<sg%>:nyuntulu Dash_CaseSuffix ; ! Dir/LR
+nyuntu%<prn%>%<pers%>%<p2%>%<sg%>:nyuntu-lu Dash_CaseSuffix ; ! Dir/LR
+nyanungu%<prn%>%<pers%>%<p3%>%<sg%>:nyanungu Dash_CaseSuffix ;
+ngali%<prn%>%<pers%>%<p1%>%<du%>%<incl%>:ngali Dash_CaseSuffix ;
+ngali%<prn%>%<pers%>%<p1%>%<du%>%<incl%>:ngalijarra Dash_CaseSuffix ; ! Dir/LR
+ngali%<prn%>%<pers%>%<p1%>%<du%>%<incl%>:ngali-jarra Dash_CaseSuffix ; ! Dir/LR
+ngajarra%<prn%>%<pers%>%<p1%>%<du%>%<excl%>:ngajarra Dash_CaseSuffix ; 
+ngalipa%<prn%>%<pers%>%<p1%>%<pl%>%<incl%>:ngalipa Dash_CaseSuffix ;
+nganimpa%<prn%>%<pers%>%<p1%>%<pl%>%<excl%>:nganimpa Dash_CaseSuffix ;
+nyumpala%<prn%>%<pers%>%<p2%>%<du%>:nyumpala Dash_CaseSuffix ; 
+nyurrarla%<prn%>%<pers%>%<p2%>%<pl%>:nyurrarla Dash_CaseSuffix ;
+nyanungu-jarra%<prn%>%<pers%>%<p3%>%<du%>:nyanungu-jarra Dash_CaseSuffix ;
+nyanungu%<prn%>%<pers%>%<p3%>%<pl%>:nyanungu-rra Dash_CaseSuffix ;  
+nyanungu%<prn%>%<pers%>%<p3%>%<pl%>:nyanungu-patu Dash_CaseSuffix ;  
+
+
+!%<prn%>%<pers%>: PronomPersonNumber ;
+
+!LEXICON Pronomial_p1
+!%<prn%>%<pers%>: PronomPersonNumber_p1 ;
+
+!LEXICON PronomPersonNumber
+!%<p2%>%<sg%>:untu # ;
+!%<p2%>%<sg%>:untu%>lu # ;
+!%<p3%>%<sg%>:anungu # ;
+!%<p2%>%<du%>:umpala # ;
+!%<p2%>%<pl%>:urrarla # ;
+!%<p3%>%<du%>:anungu%-jarra # ;
+!%<p3%>%<pl%>:anungu%-rra # ;
+!%<p3%>%<pl%>:anungu%-patu # ;
+
+!LEXICON PronomPersonNumber_p1
+!%<p1%>%<sg%>:aju # ;
+!%<p1%>%<sg%>:aju%>lu # ;
+!%<p1%>%<du%>%<incl%>:ali # ;
+!%<p1%>%<du%>%<incl%>:ali%>jarra # ;
+!%<p1%>%<du%>%<excl%>:ajarra # ;
+!%<p1%>%<pl%>%<incl%>:alipa # ;
+!%<p1%>%<pl%>%<excl%>:animpa # ;
+
+LEXICON Conjunction
+%<cnjcoo%>: # ;
+
+LEXICON Adjective
+%<adj%>: Dash_CaseSuffix ;
+%<adj%>%<subst%>: Dash_CaseSuffix ;
+! %<adj%>: CaseSuffix ;
+! %<adj%>%<subst%>: CaseSuffix ;
+
+LEXICON NounNumber_2vow
+%<n%>%<sg%>: Dash_CaseSuffix_2vow ;
+%<n%>%<du%>:%-jarra Dash_CaseSuffix ;
+%<n%>%<du%>:jarra Dash_CaseSuffix ;! Dir/LR
+%<n%>%<pl%>%<poss%>:%-nyanu Dash_CaseSuffix ;
+%<n%>%<pl%>%<poss%>:nyanu Dash_CaseSuffix ;! Dir/LR
+%<n%>%<pl%>:%-patu Dash_CaseSuffix ;
+%<n%>%<pl%>:patu Dash_CaseSuffix ;! Dir/LR
+
+LEXICON NounNumber
+%<n%>%<sg%>: Dash_CaseSuffix ;
+%<n%>%<du%>:%-jarra Dash_CaseSuffix ;
+%<n%>%<du%>:jarra Dash_CaseSuffix ;! Dir/LR 
+%<n%>%<pl%>:%-patu Dash_CaseSuffix ;
+%<n%>%<pl%>:patu Dash_CaseSuffix ;! Dir/LR 
+
+LEXICON CaseSuffix_2vow
+!%<dat%>:-k%{U%} Topic ;
+%<dat%>:k%{U%} Topic ; ! Dir/LR 
+%<erg%>:ngku Topic ; !%{I%}
+%<all%>:kurra Topic ; !
+%<all%>:kirra Topic ; ! Dir/LR 
+%<com%>:ngkajinta Topic ;
+%<ela%>:ngurlu # ; !%{I%}
+%<loc%>:ngka Topic ;
+
+LEXICON CaseSuffix
+!%<dat%>:-k%{U%} Topic ;
+%<dat%>:k%{U%} Topic ; ! Dir/LR 
+%<erg%>:rlu NounTense ; !%{I%}
+%<erg%>:rlu Topic ; ! Dir/LR 
+%<erg%>:rlu Dash_SubjectAux ; ! Dir/LR 
+%<all%>:kurra Topic ;
+%<all%>:kirra Topic ; ! Dir/LR 
+%<com%>:rlajinta Topic ;
+%<ela%>:ngurlu Topic ;
+%<loc%>:rla Topic ;
+
+LEXICON Dash_CaseSuffix_2vow
+%<sim%>:%-piya # ;
+%<abs%>: Clitic_CaseSuffix_2vow ;
+:%>%- Clitic_CaseSuffix_2vow ; 
+: NounTense ; ! Dir/LR
+
+LEXICON Dash_CaseSuffix
+%<sim%>:%-piya # ;
+%<abs%>: Clitic_CaseSuffix ;
+: Clitic_CaseSuffix ;
+: NounTense ; ! Dir/LR
+
+LEXICON Numeral
+%<num%>:%-pala # ;
+%<num%>:pala # ; ! Dir/LR
+%<num%>: # ; ! Dir/LR
+
+LEXICON Adverb
+%<adv%>: # ;
+%<adv%>:%>%- Adverb_ObjectAux ;
+%<adv%>:%> Adverb_ObjectAux ; ! Dir/LR
+
+LEXICON Adverb_ObjectAux
+# ; 
+%<obj1sg%>:ju SubjectObjectAux ;!%{I%}
+%<obj2sg%>:ngku SubjectObjectAux ;!%{I%}
+%<obj3sg%>:rla Dash_CaseSuffix ;
+%<obj1duincl%>:ngali SubjectObjectAux ;
+%<obj1duincl%>:ngalingki SubjectObjectAux ;
+%<obj1duexcl%>:jarrangku SubjectObjectAux ;
+%<obj1plincl%>:ngalpa SubjectObjectAux ;
+%<obj1plexcl%>:nganpa SubjectObjectAux ;
+%<obj2du%>:ngku-pala SubjectObjectAux ;
+%<obj2pl%>:nyarra SubjectObjectAux ;
+%<obj3du%>:palangu SubjectObjectAux ;
+%<obj3pl%>:jana SubjectObjectAux ;
+
+LEXICON Topic
+# ; 
+%<top%>:ju # ;
+%<top%>:%-ju # ; ! Dir/LR
+
+LEXICON Clitic_CaseSuffix
+: # ;
+:%- Clitic ;
+: Clitic ; ! Dir/LR
+:%> CaseSuffix ; ! Dir/LR
+:%>%- CaseSuffix ;
+
+LEXICON Clitic_CaseSuffix_2vow
+: # ;
+:%- Clitic ;
+: Clitic ; ! Dir/LR
+:%> CaseSuffix_2vow ; ! Dir/LR
+:%>%- CaseSuffix_2vow ; 
+
+LEXICON Clitic
+%<mod%>:juku # ;
+%<mod%>:nyayirni # ; 
+%<mod%>:kari # ;
+%<mod%>:wiyi # ;
+%<mod%>:yijala # ;
+%<mod%>:puka # ;
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!                          L E X I C O N                                  !!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+LEXICON NounRoot
+! house:house RegNounInfl ; ! A noun
+pirli:pirli NounNumber_2vow ; ! rock
+marlu:marlu NounNumber_2vow ;
+kurdu:kurdu NounNumber_2vow ; ! child
+jarra:jarra NounNumber_2vow ;
+yapa:yapa NounNumber_2vow ; ! person
+pampa:pampa NounNumber_2vow ;
+jarntu:jarntu NounNumber_2vow ; ! dog
+warlu:warlu NounNumber_2vow ; ! fire
+yapa:yapa NounNumber_2vow ; ! person
+puku:puku NounNumber_2vow ; ! book
+karru:karru NounNumber_2vow ; ! creek
+ngapa:ngapa NounNumber_2vow ; ! rain
+jarda:jarda NounNumber_2vow ; ! sleep
+nyinyi:nyinyi NounNumber_2vow ; ! bird
+nurnpu:nurnpu NounNumber_2vow ; ! mouse
+pama:pama NounNumber_2vow ; ! liquor
+milpa:milpa NounNumber_2vow ; ! eye
+kara:kara NounNumber_2vow ; ! salt
+lirra:lirra NounNumber_2vow ; ! voice
+ngapa:ngapa NounNumber_2vow ; ! water
+walya:walya NounNumber_2vow ; ! ground
+wanta:wanta NounNumber_2vow ; ! year
+mula:mula NounNumber_2vow ; ! egg
+juka:juka NounNumber_2vow ; ! sugar or cousin
+jurru:jurru NounNumber_2vow ; ! head
+turnu:turnu NounNumber_2vow ; ! group/gathering
+yalyu:yalyu NounNumber_2vow ; ! blood
+japi:japi NounNumber_2vow ; ! entrance
+ngurra:ngurra NounNumber_2vow ; ! residence
+putu:putu NounNumber_2vow ; ! shoe
+larrpa:larrpa NounNumber_2vow ; ! skeleton
+kaku:kaku NounNumber_2vow ; ! sister
+kuyu:kuyu NounNumber_2vow ; ! meat
+marra-marra:marra-marra NounNumber_2vow ; ! angel
+palya:palya NounNumber_2vow ; ! wax
+murru:murru NounNumber_2vow ; ! sore
+panji:panji NounNumber_2vow ; ! bed
+rdilyki:rdilyki NounNumber_2vow ; ! fragment
+mirdi:mirdi NounNumber_2vow ; ! knee
+rdaka:rdaka NounNumber_2vow ; ! hand
+wirlki:wirlki NounNumber_2vow ; ! boomerang
+puru:puru NounNumber_2vow ; ! theft
+kaja:kaja NounNumber_2vow ; ! son
+karnta:karnta NounNumber_2vow ; ! woman
+lipa:lipa NounNumber_2vow ; ! drawing
+ngarrka:ngarrka NounNumber_2vow ; ! married man
+miyi:miyi NounNumber_2vow ; ! food
+ngirnti:ngirnti NounNumber_2vow ; ! tail
+ngulya:ngulya NounNumber_2vow ; ! burrow
+nama:nama NounNumber_2vow ; ! ant
+langa:langa NounNumber_2vow ; ! ear
+walu:walu NounNumber_2vow ; ! head
+karli:karli NounNumber_2vow ; ! boomerang
+junma:junma NounNumber_2vow ; ! knife
+wati:wati NounNumber_2vow ; ! man
+parra:parra NounNumber_2vow ; ! day/light
+yangka:yangka NounNumber_2vow ; ! aforementioned one
+lawa:lawa NounNumber_2vow ; ! nothing
+yimi:yimi NounNumber_2vow ; ! speech, story
+jurdu:jurdu NounNumber_2vow ; ! blowing dust
+ngurlu:ngurlu NounNumber_2vow ; ! seed
+pipa:pipa NounNumber_2vow ; ! book
+
+warlkurru:warlkurru NounNumber ;
+wawirri:wawirri NounNumber ;
+maliki:maliki NounNumber ;
+minija:minija NounNumber ; ! cat
+marnilpa:marnilpa NounNumber ; ! hair
+katarni:katarni NounNumber ; ! cotton
+wirliya:wirliya NounNumber ; ! foot
+mayawunpa:mayawunpa NounNumber ; ! wind/air
+jiwirnpa:jiwirnpa NounNumber ; ! wing
+kapurdu:kapurdu NounNumber ; ! football
+marumpu:marumpu NounNumber ; ! hand
+jamaru:jamaru NounNumber ; ! mouth
+lirra-pin-pinpa:lirra-pin-pinpa NounNumber ; ! lip
+kuwana:kuwana NounNumber ; ! lizard
+jupu-jupu:jupu-jupu NounNumber ; ! soup
+kawurlu:kawurlu NounNumber ; ! gold
+wapirra:wapirra NounNumber ; ! God
+marayarla:marayarla NounNumber ; ! soldier
+jirrjinti:jirrjinti NounNumber ; ! sneeze
+yurlkurrpa:yurlkurrpa NounNumber ; ! soap
+kirdirrpa:kirdirrpa NounNumber ; ! cave or jail
+ngukarna:ngukarna NounNumber ; ! throat
+japirdimi:japirdimi NounNumber ; ! collar
+waninja:waninja NounNumber ; ! neck
+jirnarri:jirnarri NounNumber ; ! food
+mangarri:mangarri NounNumber ; ! vegetable
+pintiji-manu:pintiji-manu NounNumber ; ! blister
+purntuny-pari:purntuny-pari NounNumber ; ! bump
+mukarti:mukarti NounNumber ; ! hat
+katarlpi:katarlpi NounNumber ; ! pillow
+mirntangali:mirntangali NounNumber ; ! noon
+payarrpa:payarrpa NounNumber ; ! hill
+jimanta:jimanta NounNumber ; ! shoulder
+pawiyi:pawiyi NounNumber ; ! back/spine
+ngardarri-kirlangu:ngardarri-kirlangu NounNumber ; ! priest
+wankaru:wankaru NounNumber ; ! life
+malurnpa:malurnpa NounNumber ; ! shelter
+jaati:jaati NounNumber ; ! shirt
+mulkunju:mulkunju NounNumber ; ! grass
+jirri-jirrirnpa:jirri-jirrirnpa NounNumber ; ! forest
+nalija:nalija NounNumber ; ! tea
+watiya:watiya NounNumber ; ! tree/tree
+jampita:jampita NounNumber ; ! cup
+kirlaji:kirlaji NounNumber ; ! bottle
+yungkurnu:yungkurnu NounNumber ; ! bone
+rampaku:rampaku NounNumber ; ! bread
+wanjilypiri:wanjilypiri NounNumber ; ! star
+lirrirnpa:lirrirnpa NounNumber ; ! cricket
+warlapirti:warlapirti NounNumber ; ! leg
+naanja:naanja NounNumber ; ! horse
+jamana-kiri:jamana-kiri NounNumber ; ! sandal
+maa-wati:maa-wati NounNumber ; ! sheep
+yumurru:yumurru NounNumber ; ! hair/fur
+milpirri:milpirri NounNumber ; ! cloud
+mujunyku:mujunyku NounNumber ; ! rabbit
+warlalja:warlalja NounNumber ; ! native
+minyinjirri:minyinjirri NounNumber ; ! cockroach
+ngurrara:ngurrara NounNumber ; ! home
+kurlumpurrngu:kurlumpurrngu NounNumber ; ! trumpet
+yirrinji:yirrinji NounNumber ; ! centipede
+jurnarrpa:jurnarrpa NounNumber ; ! clothes
+jurru-rdilypirrpa:jurru-rdilypirrpa NounNumber ; ! expert
+liwanja:liwanja NounNumber ; ! fish
+puwujuma:puwujuma NounNumber ; ! fox
+yutarlki:yutarlki NounNumber ; ! heart
+nguru-warlu-wiri-kirli:nguru-warlu-wiri-kirli NounNumber ; ! hell
+matirdiji:matirdiji NounNumber ; ! four
+jilkarla:jilkarla NounNumber ; ! thorn
+yutarlki:yutarlki NounNumber ; ! heart
+walyajarra:walyajarra NounNumber ; ! ancestors
+miparrpa:miparrpa NounNumber ; ! face or person
+japu-japu:japu-japu NounNumber ;  ! ball
+pakarli:pakarli NounNumber ; ! headdress or paper
+kurdu-kurdu:kurdu-kurdu NounNumber ; ! children
+minngarli:minngarli NounNumber ; ! tears
+yankirri:yankirri NounNumber ; ! emu
+makiti:makiti NounNumber ; ! rifle
+kurlarda:kurlarda NounNumber ; ! spear
+Jakamarra:Jakamarra NounNumber ; ! Jakamarra (a name)
+Jupurrula:Jupurrula NounNumber ; ! Jupurrula (a name)
+Napaljarri:Napaljarri NounNumber ; ! Napaljarri (a name)
+Jangala:Jangala NounNumber ; ! Jangala (a name)
+Nangala:Nangala NounNumber ; ! Nangala (a name)
+Kaatu:Kaatu NounNumber ; ! God
+Jijajiji:Jijajiji NounNumber ; ! Jesus
+wakati:wakati NounNumber ; ! pigweed
+parraja:parraja NounNumber ; ! coolmamon
+
+LEXICON VerbRoot
+wangkami:wangka VerbClassI_iv ; ! to speak
+parnkami:parnka VerbClassI_iv ; ! to run
+karrimi:karri VerbClassI_iv ; ! to be standing
+purlami:purla VerbClassI_iv ; ! to shout
+jangkardu-parnkami:jangkardu-parnka VerbClassI_tv ; ! to attack
+nyinami:nyina VerbClassI_iv ; ! to be
+jarda-jarrimi:jarda-jarri VerbClassI_iv ; ! to sleep
+julyurl-wantimi:julyurl-wanti VerbClassI_iv ; ! to swim
+pardimi:pardi VerbClassI_iv ; ! to emerge, grow
+wipimi:wipi VerbClassI_iv ; ! to extend
+pata-karrimi:pata-karri VerbClassI_iv ; ! to fall
+nyinanja-wantimi:nyinanja-wanti VerbClassI_iv ; ! to sit down 
+paarr-paarr-jankami:paarr-paarr-janka VerbClassI_tv ; ! to burn or hurt
+yukami:yuka VerbClassI_iv ; ! to enter
+yarnkami:yarnka VerbClassI_iv ; ! to depart
+japirdimi:japirdi VerbClassI_iv ; ! to threaten (NEED TV)
+jarntimi:jarnti VerbClassI_iv ; ! to limp
+jijami:jija VerbClassI_iv ; ! to succomb to (NEED TV)
+jirrtimi:jirrti VerbClassI_iv ; ! to hang out (tongue)
+jitimi:jiti VerbClassI_iv ; ! to descend, dismount
+kampami:kampa VerbClassI_iv ; ! to burn
+kapatimi:kapati VerbClassI_iv ; ! to be uneasy
+karlimi:karli VerbClassI_iv ; ! to flow
+karrkami:karrka VerbClassI_iv ; ! to proceed
+kawarirrimi:kawarirri VerbClassI_iv ; ! to wander
+kulpami:kulpa VerbClassI_iv ; ! to return to origin
+irrimi:irri VerbClassI_iv ; ! to swell
+ngarlarrimi:ngarlarri VerbClassI_iv ; ! to laugh
+ngunami:nguna VerbClassI_iv ; ! to lie, recline
+palimi:pali VerbClassI_iv ; ! to die
+papimi:papi VerbClassI_iv ; ! to ignite 
+parntarrimi:parntarri VerbClassI_iv ; ! to crouch
+parntimi:parnti VerbClassI_iv ; ! to smell, give off odour
+kampami:kampa VerbClassI_iv ; ! to burn
+purrami:purra VerbClassI_iv ; ! to burn, cook something (NEED TV)
+wantimi:wanti VerbClassI_iv ; ! to fall, drop
+wapami:wapa VerbClassI_iv ; ! to move about, go
+wapirrimi:wapirri VerbClassI_iv ; ! to cover up
+waraparnpimi:waraparnpi VerbClassI_iv ; ! to sing out
+wipimi:wipi VerbClassI_iv ; ! to radiate out
+wirnpirlimi:wirnpirli VerbClassI_iv ; ! to whistle
+wirntimi:wirnti VerbClassI_iv ; ! to dance
+yampimi:yampi VerbClassI_iv ; ! to leave someone alone (NEED TV)
+yilyami:yilya VerbClassI_iv ; ! to start on a journey
+yulami:yula VerbClassI_iv ; ! to cry, howl
+yulkami:yulka VerbClassI_iv ; ! to love, cherish
+yurirrimi:yurirri VerbClassI_iv ; ! to move, stir
+
+
+
+
+pakarni:paka VerbClassII_tv ; ! to kill
+yirrarni:yirra VerbClassII_tv ; ! to put, make
+yunparni:yunpa VerbClassII_tv ; ! to sing
+payirni:payi VerbClassII_tv ; ! to interrogate
+milarni:mila VerbClassII_tv ; ! to choose
+yarlkirni:yarlki VerbClassII_tv ; ! to sting/bite
+warla-mardarni:warla-marda VerbClassII_tv ; ! to protect
+witirni:witi VerbClassII_tv ; ! to have
+mardarni:marda VerbClassII_tv ; ! to own
+marnpirni:marnpi VerbClassII_tv ; ! to touch
+parnpirni:parnpi VerbClassII_tv ; ! to injure
+pantirni:pant%{I%} VerbClassII_tv ; ! to spear/draw
+yajarni:yaja VerbClassII_tv ; ! to fetch or make (plants) grow
+kijirni:kiji VerbClassII_tv ; ! to throw
+jarntirni:jarnti VerbClassII_tv ; ! to carve
+pajirni:paji VerbClassII_tv ; ! to bite or pick/gather
+yangkarni:yangka VerbClassII_tv ; ! to wear (something)
+pardarni:parda VerbClassII_tv ; ! to wait (for)
+katirni:kati VerbClassII_tv ; ! to tread on
+luwarni:luwa VerbClassII_tv ; ! to shoot
+
+jajarni:jaja VerbClassII_tv ; ! to feed from
+jampirni:jampi VerbClassII_tv ; ! to lick
+japirni:japi VerbClassII_tv ; ! to ask (someone) about something
+jitirni:jiti VerbClassII_tv ; ! to tease
+kardirni:kardi VerbClassII_tv ; ! to scoop up
+katirni:kati VerbClassII_tv ; ! to weight down on 
+kipirni:kipi VerbClassII_tv ; ! to winnow
+kulparni:kulpa VerbClassII_tv ; ! to use
+larrjirni:larrji VerbClassII_tv ; ! to scratch
+majarni:maja VerbClassII_tv ; ! to straighten, stretch
+maparni:mapa VerbClassII_tv ; ! to rub, anoint
+kulparni:kulpa VerbClassII_tv ; ! to go in procession
+mirrirni:mirri VerbClassII_tv ; ! to erase
+ngajarni:ngaja VerbClassII_tv ; ! to void
+ngantirni:nganti VerbClassII_tv ; ! to build, erect
+ngarlkirni:ngarlki VerbClassII_tv ; ! to block
+ngarrirni:ngarri VerbClassII_tv ; ! to tell/scold
+ngarrmirni:ngarrmi VerbClassII_tv ; ! to increase by ritual
+nyunjirni:nyunji VerbClassII_tv ; ! to kiss
+
+
+
+yinyi:y%{I%} VerbClassIII_tv ; ! to give
+wajili-pinyi:wajili-p%{I%} VerbClassIII_tv ; ! to chase
+jangku-pinyi:jangku-p%{I%} VerbClassIII_tv ; ! to promise
+juurl-pinyi:juurl-p%{I%} VerbClassIII_iv ; ! to jump
+muru-pinyi:muru-p%{I%} VerbClassIII_tv ; ! to insert or swallow
+nyanyi:nya VerbClassIII_tv ; ! to look for/seek
+purda-nyanyi:purda-nya VerbClassIII_tv ; ! to hear
+marri-pinyi:marri-p%{I%} VerbClassIII_tv ; ! to desire
+pinyi:p%{I%} VerbClassIII_tv ; ! to hit, bit, dance
+milya-pinyi:milya-p%{I%} VerbClassIII_tv ; ! to recognize
+lurlurl-pi-nyi:lurlurl-p%{I%} VerbClassIII_tv ; ! to shake
+wangul-pi-nyi:wangul-p%{I%} VerbClassIII_tv ; ! to winnow
+
+ngarni:nga VerbClassIV_tv ; ! to eat
+
+yani:ya VerbClassV_iv ; ! to come, go
+mirlirliny-mani:mirlirliny-ma VerbClassV_iv ; ! to shine
+larra-yani:larra-ya VerbClassV_iv ; ! to crack
+mani:ma VerbClassV_tv ; ! to get, pick up, do
+wiriji-mani:wiriji-ma VerbClassV_tv ; ! to save
+jungarni-mani:jungarni-ma VerbClassV_tv ; ! to explain
+yalyi-mani:yalyi-ma VerbClassV_tv ; ! to undress
+pipa-kurra-mani:pipa-kurra-ma VerbClassV_tv ; ! to write
+kirlka-ma-ni:kirlka-ma VerbClassV_tv ; ! to clean
+
+LEXICON AuxRoot
+TenseAux ;
+!ka:kulaka TenseAux ;
+!kajilpa:ka TenseAux ;
+!kalaka:ka TenseAux ;
+!kulaka:ka TenseAux ;
+
+LEXICON PronomRoot1
+ngaju:ng Pronomial_p1 ;
+nyuntu:nyuntu Pronomial ;
+nyanungu:ny Pronomial ;
+ngali:ng Pronomial_p1 ;
+ngajarra:ng Pronomial_p1 ;
+ngalipa:ng Pronomial_p1 ;
+nganimpa:ng Pronomial_p1 ;
+nyumpala:ny Pronomial ;
+nyurrarla:ny Pronomial ;
+nyanungu%-jarra:ny Pronomial;
+nyanungu:ny Pronomial;
+
+LEXICON PronomRoot
+Pronomial ;
+
+LEXICON ConjRoot
+manu:manu Conjunction ;
+kapu:kapu Conjunction ;
+
+LEXICON AdjRoot
+mari:mari Adjective ;
+pampa:pampa Adjective ;
+wita:wita Adjective ;
+wiri:wiri Adjective ;
+ngurrju:ngurrju Adjective ; ! good
+kawarta:kawarta Adjective ;
+kardirri:kardirri Adjective ; ! white
+kilji:kilji Adjective ; ! fast or loud
+kuwalypa:kuwalypa Adjective ; ! limp
+jinta:jinta Adjective ; ! alone
+kalypa:kalypa Adjective ; ! soft
+rdangkarlpa:rdangkarlpa Adjective ; ! short
+kirrirdi:kirrirdi Adjective ; ! long
+kunjuru-kunjuru:kunjuru-kunjuru Adjective ; ! blue
+yukiri-kiri:yukiri-kiri Adjective ; ! green
+tirirtiri:tirirtiri Adjective ; ! red
+paarrpa-paarrpa:paarrpa-paarrpa Adjective ; ! sore, painful
+pulya:pulya Adjective ; ! quiet
+jampu:jampu Adjective ; ! left
+jampu-karra:jampu-karra Adjective ; ! left-handed
+pulyurr-pulyurrpa:pulyurr-pulyurrpa Adjective ; ! gray
+rurla-rurla:rurla-rurla Adjective ; ! swollen
+lulku:lulku Adjective ; ! large
+karntawarra-karntawarra:karntawarra-karntawarra Adjective ; ! yellow
+yirrikarrika:yirrikarrika Adjective ; ! unfriendly
+rama:rama Adjective ; ! drunk
+warlu:warlu Adjective ; ! hot
+murntu:murntu Adjective ; ! cooked
+kaalypirri:kaalypirri Adjective ; ! cold
+rarralypa:rarralypa Adjective ; ! easy
+nguurl-nguurlpa:nguurl-nguurlpa Adjective ; ! exhausted
+warlu:warlu Adjective ; ! angry
+manamparra:manamparra Adjective ; ! healthy
+kalypa:kalypa Adjective ; ! soft
+jaka-ngalya:jaka-ngalya Adjective; ! full
+ngayarrka:ngayarrka Adjective; ! pregnant
+nyurltu-nyurltu:nyurltu-nyurltu Adjective; ! tangled or garbled
+yijardu:yijardu Adjective ; ! true
+tarnnga:tarnnga Adjective ; ! forever
+junga:junga Adjective ; ! right side, true
+-nyayirni-wangu:-nyayirni-wangu Adjective ; ! sacred
+wakurturdu:wakurturdu Adjective ; ! fast
+
+LEXICON NumRoot
+marnkurrpa:marnkurrpa Numeral ; ! three
+matirdiji:matirdiji Numeral ; ! four
+mirdi:mirdi Numeral ; ! four
+murntu:murntu Numeral ; ! four
+rdaka:rdaka Numeral ; ! five
+jilkarla:jilkarla Numeral ; ! six
+wirlki:wirlki Numeral ; ! seven
+paniya-jarra:paniya-jarra Numeral ; ! eight
+jarukutu:jarukutu Numeral ; ! nine
+karlarla:karlarla Numeral ; ! ten
+
+LEXICON AdvRoot
+nyurru-wiyi:nyurru-wiyi Adverb ; ! long ago 
+marda:marda Adverb ; ! perhaps, maybe
+jirrnganja:jirrnganja Adverb ; ! with, accopmanying
+yarda:yarda Adverb ; ! perhaps, maybe
+nyurru:nyurru Adverb ; ! already
+
+LEXICON Punctuation
+.%<sent%>:. # ;
+..%<sent%>:.. # ;
+...%<sent%>:... # ;
+%;%<sent%>:%; # ;
+%:%<sent%>:%: # ;
+%!%<sent%>:%! # ;
+%-%<guio%>:%- # ;
+%—%<guio%>:%— # ;
+,%<cm%>:, # ;
+%?%<sent%>:%? # ;
+%'%<apos%>:%' # ;
+%"%<sent%>:%" # ;
+%«%<lquot%>:%« # ;
+%»%<rquot%>:%» # ;
+%”%<rquot%>:%” # ;
+%“%<lquot%>:%“ # ;
+%(%<lpar%>:%( # ;
+%]%<rpar%>:%] # ;
+%[%<lpar%>:%[ # ;
+%)%<rpar%>:%) # ;
+\%<sent%>:\ # ;
+/%<sent%>:/ # ;
+
+! Resources:
+! http://wiki.apertium.org/wiki/Starting_a_new_language_with_HFST#Lexicon
+! http://wiki.apertium.org/wiki/Lttoolbox_and_lexc
+! http://wiki.apertium.org/wiki/Apertium-specific_conventions_for_lexc
+! https://kitwiki.csc.fi/twiki/bin/view/KitWiki/HfstHome
+! http://hfst.sourceforge.net/
+! http://www.cis.upenn.edu/~cis639/docs/lexc.html
+! http://wiki.apertium.org/wiki/Hfst
+

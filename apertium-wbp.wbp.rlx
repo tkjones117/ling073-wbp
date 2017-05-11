@@ -1,0 +1,50 @@
+# Firstly, we need to define what tags should be considered sentence delimiters. For this example, only full stop is set as delimiter.
+DELIMITERS = "<.>" ;
+
+# We can define sets for common tag clusters
+LIST Case = (n s) (n p) ; # A set that matches either a Noun Singular or a Noun Plural
+LIST Adj = (adj subst) (adj) ;
+LIST N = n ;
+LIST Aux = vaux ;
+LIST PersPron = (prn pers p1 sg) ;
+LIST NounA = (n sg abs)(n sg)(n sg prf) ;
+LIST Vtv = (v tv) ;
+LIST Viv = (v iv) ;
+LIST NumWord = (num) (n sg) ;
+LIST NVaux = (vaux) (n) ;
+
+SECTION
+# If there is a noun to the right or left, I cannot be a substantive adjective.
+REMOVE (adj subst) IF ((1 N) OR (-1 N)) ;
+
+# If there is not a noun to the right or left, I must be a substantive adjective.
+SELECT (adj subst) IF (NOT -1 N) (NOT 1 N) ;
+
+# If there is a singular noun to the right, I cannot be a verb or noun.
+#REMOVE (n) OR (v) IF (1 (n s)) ;
+
+# If there is a conjunction followed by a certain cohort of the same CASE as me, choose me.
+SELECT $$Case IF (1 (cnjcoo) LINK 1C $$Case) ;
+
+# If there is a transitive verb two words to the left, I don't take a subject.
+REMOVE (n sg prf) IF (-2 Vtv) ;
+
+# If there is a transitive verb two words to the left, I'm in the absolutive case.
+SELECT (n sg abs) IF (-2 Vtv) ;
+
+# If there is an intransitive verb two words to the left, I'm the subject.
+SELECT (n sg abs) IF (-2 Viv) ;
+
+# If there is an auxiliary to the right or left, I cannot be a numeral.
+REMOVE (num) IF ((1 Aux) OR (-1 Aux)) ;
+
+# If there is an auxiliary to the left, I cannot be an auxiliary.
+REMOVE (vaux) IF (-1 Aux) ;
+
+# Resources:
+# http://visl.sdu.dk/cg3.html
+# http://groups.google.com/group/constraint-grammar
+# http://kevindonnelly.org.uk/2010/05/constraint-grammar-tutorial/
+# http://wiki.apertium.org/wiki/Constraint_Grammar
+# http://wiki.apertium.org/wiki/Apertium_and_Constraint_Grammar
+

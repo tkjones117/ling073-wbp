@@ -1,0 +1,8 @@
+prefix=@prefix@
+exec_prefix=${prefix}
+srcdir=@datarootdir@/apertium/apertium-wbp
+
+Name: apertium-wbp
+Description: Finite-state morphological transducer and constraint grammar for wbp 
+Version: @VERSION@
+
