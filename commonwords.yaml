@@ -1,0 +1,27 @@
+Config:
+  hfst:
+    App: hfst-lookup
+    Gen: ../wbp.autogen.hfst
+    Morph: ../wbp.automorf.hfst
+Tests:
+  New forms:
+    nyayirni<mod>: nyayirni
+    manu<cnjcoo>: manu
+    yapa<n><sg>: yapa
+    <unk>: kurlu
+    <unk>: ju
+    <unk>: R
+    <unk>: lu
+    <unk>: lku
+    <unk>: kari
+    <unk>: jarra
+    <unk>: war
+    <unk>: jana
+    <unk>: a
+    <unk>: kurra
+    <unk>: mani
+    <unk>: rla
+    <unk>: r
+    <unk>: Jarra
+    <unk>: mar
+    <unk>: juku
